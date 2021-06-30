@@ -9,6 +9,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    semi: 0,
+    semi: [2, 'never'],
+    'arrow-parens': [2, 'as-needed', { requireForBlockBody: true }],
   },
 }
