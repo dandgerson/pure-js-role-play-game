@@ -10,12 +10,7 @@ console.log({
 })
 
 const drawRect = ({
-  start = [0, 0],
-  end = [w, h],
-  fillStyle,
-  width,
-  height,
-  speed,
+  start = [0, 0], end = [w, h], fillStyle, width, height, speed,
 }) => {
   let [x, y] = start
 
