@@ -37,6 +37,9 @@ export default ({ w, h, ctx }) => {
   // })
 
   clearCanvas({
-    ctx, w, h, frequency: 300,
+    ctx,
+    w,
+    h,
+    frequency: 300,
   })
 }
