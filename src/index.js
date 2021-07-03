@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import './styles/main.scss'
 
 import character from './assets/Male-3-Walk.png'
@@ -32,7 +31,7 @@ img.addEventListener('load', () => {
   const step = 10
   let turned = 'bottom'
 
-  const applyActions = () => {
+  const triggerCycle = () => {
     cycle = (cycle + 1) % shots
   }
 
@@ -42,28 +41,28 @@ img.addEventListener('load', () => {
         pX += pX + spriteW >= w ? 0 : step
         turned = 'right'
 
-        applyActions()
+        triggerCycle()
         break
       }
       case state.isLeftPressed: {
         pX -= pX <= 0 ? 0 : step
         turned = 'left'
 
-        applyActions()
+        triggerCycle()
         break
       }
-      case state.isTopPressed: {
+      case state.isUpPressed: {
         pY -= pY <= 0 ? 0 : step
         turned = 'top'
 
-        applyActions()
+        triggerCycle()
         break
       }
-      case state.isBottomPressed: {
+      case state.isDownPressed: {
         pY += pY + spriteH >= h ? 0 : step
         turned = 'bottom'
 
-        applyActions()
+        triggerCycle()
         break
       }
       default:
@@ -89,11 +88,11 @@ img.addEventListener('load', () => {
 const keyMap = {
   down: {
     keys: ['Down', 'ArrowDown', 's'],
-    state: 'isBottomPressed',
+    state: 'isDownPressed',
   },
   up: {
     keys: ['Up', 'ArrowUp', 'w'],
-    state: 'isTopPressed',
+    state: 'isUpPressed',
   },
   left: {
     keys: ['Left', 'ArrowLeft', 'a'],
@@ -107,7 +106,9 @@ const keyMap = {
 
 const handleKeyDown = (e) => {
   Object.keys(keyMap).forEach((key) => {
-    state[keyMap[key].state] = keyMap[key].keys.includes(e.key)
+    if (keyMap[key].keys.includes(e.key)) {
+      state[keyMap[key].state] = true
+    }
   })
 }
 const handleKeyUp = (e) => {
