@@ -39,42 +39,49 @@ img.addEventListener('load', () => {
   setInterval(() => {
     switch (true) {
       case state.isRightPressed: {
-        pX += (pX + spriteW >= w ? 0 : step)
+        pX += pX + spriteW >= w ? 0 : step
         turned = 'right'
 
         applyActions()
         break
       }
       case state.isLeftPressed: {
-        pX -= (pX <= 0 ? 0 : step)
+        pX -= pX <= 0 ? 0 : step
         turned = 'left'
 
         applyActions()
         break
       }
       case state.isTopPressed: {
-        pY -= (pY <= 0 ? 0 : step)
+        pY -= pY <= 0 ? 0 : step
         turned = 'top'
 
         applyActions()
         break
       }
       case state.isBottomPressed: {
-        pY += (pY + spriteH >= h ? 0 : step)
+        pY += pY + spriteH >= h ? 0 : step
         turned = 'bottom'
 
         applyActions()
         break
       }
-      default: break
+      default:
+        break
     }
 
     ctx.clearRect(0, 0, w, h)
 
     ctx.drawImage(
       img, // src
-      cycle * spriteW, spriteH * directions[turned], spriteW, spriteH, // pos into image
-      pX, pY, spriteW, spriteH, // pos into canvas
+      cycle * spriteW,
+      spriteH * directions[turned],
+      spriteW,
+      spriteH, // pos into image
+      pX,
+      pY,
+      spriteW,
+      spriteH, // pos into canvas
     )
   }, 100)
 })

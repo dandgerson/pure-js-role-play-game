@@ -36,5 +36,7 @@ export default ({ w, h, ctx }) => {
   //   speed: 120,
   // })
 
-  clearCanvas({ ctx, w, h, frequency: 300 })
+  clearCanvas({
+    ctx, w, h, frequency: 300,
+  })
 }
