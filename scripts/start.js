@@ -1,4 +1,5 @@
 const Hapi = require('@hapi/hapi')
+const Inert = require('@hapi/inert')
 const path = require('path')
 
 const port = process.env.PORT || 3000
@@ -14,7 +15,7 @@ const init = async () => {
     port,
   })
 
-  await server.register(require('@hapi/inert'))
+  await server.register(Inert)
 
   server.route({
     method: 'GET',

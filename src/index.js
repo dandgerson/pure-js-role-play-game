@@ -1,58 +1,20 @@
 import './styles/main.scss'
 
+import store from 'redux/store'
+
 import characterAtlas from './assets/Male-3-Walk.png' // 3 x 4
+// import terrainAtlas from './assets/terrain.png'
+
+import processControls from './modules/processControls'
 
 const canvas = document.querySelector('#game')
 const { width: w, height: h } = canvas.getBoundingClientRect()
 const ctx = canvas.getContext('2d')
 
-let keyState = {}
-
-const keyMap = {
-  down: {
-    keys: ['Down', 'ArrowDown', 's'],
-    state: 'isDownPressed',
-  },
-  up: {
-    keys: ['Up', 'ArrowUp', 'w'],
-    state: 'isUpPressed',
-  },
-  left: {
-    keys: ['Left', 'ArrowLeft', 'a'],
-    state: 'isLeftPressed',
-  },
-  right: {
-    keys: ['Right', 'ArrowRight', 'd'],
-    state: 'isRightPressed',
-  },
-}
-
-const handleKeyDown = (e) => {
-  Object.keys(keyMap).forEach((key) => {
-    if (keyMap[key].keys.includes(e.key)) {
-      keyState = {
-        ...keyState,
-        [keyMap[key].state]: true,
-      }
-    }
-  })
-}
-const handleKeyUp = (e) => {
-  Object.keys(keyMap).forEach((key) => {
-    if (keyMap[key].keys.includes(e.key)) {
-      keyState = {
-        ...keyState,
-        [keyMap[key].state]: false,
-      }
-    }
-  })
-}
-
-document.addEventListener('keydown', handleKeyDown)
-document.addEventListener('keyup', handleKeyUp)
-
 const img = document.createElement('img')
 img.src = characterAtlas
+
+let keyState = {}
 
 const handleImgLoad = () => {
   const sprite = {
@@ -186,3 +148,9 @@ const handleImgLoad = () => {
 }
 
 img.addEventListener('load', handleImgLoad)
+
+store.subscribe(() => {
+  keyState = store.getState().keyState
+})
+
+processControls()
