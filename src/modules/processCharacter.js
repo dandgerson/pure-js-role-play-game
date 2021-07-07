@@ -1,5 +1,5 @@
-import store from 'redux/store'
-import { setCycle, setTurned } from 'redux/reducers/characterState'
+import store from 'store'
+import { setCycle, setTurned } from 'store/reducers/characterState'
 
 import characterAtlas from 'assets/Male-3-Walk.png' // 3 x 4
 

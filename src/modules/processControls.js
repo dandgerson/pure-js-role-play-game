@@ -1,5 +1,5 @@
-import store from 'redux/store'
-import { setKeyDown, setKeyUp } from 'redux/reducers/keyState'
+import store from 'store'
+import { setKeyDown, setKeyUp } from 'store/reducers/keyState'
 
 const processControls = () => {
   const keyMap = {

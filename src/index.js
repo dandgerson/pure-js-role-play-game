@@ -1,6 +1,6 @@
 import './styles/main.scss'
 
-import store from 'redux/store'
+import store from 'store'
 
 // import terrainAtlas from './assets/terrain.png'
 
@@ -28,5 +28,8 @@ store.subscribe(characterStateListenter)
 
 processControls()
 processCharacter({
-  w, h, ctx, state,
+  w,
+  h,
+  ctx,
+  state,
 })
