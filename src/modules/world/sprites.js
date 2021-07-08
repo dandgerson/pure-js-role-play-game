@@ -1,4 +1,4 @@
-import terrainIMG from '../assets/terrain.png'
+import terrainIMG from 'assets/terrain.png'
 
 export default {
   terrain: {
