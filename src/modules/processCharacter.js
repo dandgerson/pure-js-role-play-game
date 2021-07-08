@@ -16,7 +16,7 @@ const processCharacter = ({
     w: 48,
     h: 48,
     shots: 3,
-    step: 30,
+    step: 10,
   }
 
   const initCharPos = () => {
