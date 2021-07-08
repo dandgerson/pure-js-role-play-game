@@ -4,19 +4,19 @@ import { setKeyDown, setKeyUp } from 'store/reducers/keyState'
 const processControls = () => {
   const keyMap = {
     down: {
-      keys: ['Down', 'ArrowDown', 's'],
+      keys: ['Down', 'ArrowDown', 's', 'ы'],
       state: 'isDownPressed',
     },
     up: {
-      keys: ['Up', 'ArrowUp', 'w'],
+      keys: ['Up', 'ArrowUp', 'w', 'ц'],
       state: 'isUpPressed',
     },
     left: {
-      keys: ['Left', 'ArrowLeft', 'a'],
+      keys: ['Left', 'ArrowLeft', 'a', 'ф'],
       state: 'isLeftPressed',
     },
     right: {
-      keys: ['Right', 'ArrowRight', 'd'],
+      keys: ['Right', 'ArrowRight', 'd', 'в'],
       state: 'isRightPressed',
     },
   }

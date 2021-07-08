@@ -25,6 +25,7 @@ const characterStateListenter = () => {
 
 store.subscribe(keyStateListenter)
 store.subscribe(characterStateListenter)
+// store.subscribe(() => console.log(state))
 
 processControls()
 processCharacter({
