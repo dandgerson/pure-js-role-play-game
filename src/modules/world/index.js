@@ -11,7 +11,7 @@ const processWorld = ({ ctx }) => {
     h: 48,
   }
 
-  const handleImgLoad = () => {
+  const renderWorld = () => {
     const { map: worldMap } = worldConfig
     const { terrain } = sprites
 
@@ -24,9 +24,13 @@ const processWorld = ({ ctx }) => {
         ctx.drawImage(terrainImg, ...spriteCoords, x * sprite.w, y * sprite.h, sprite.w, sprite.h)
       })
     })
+
+    window.requestAnimationFrame(renderWorld)
   }
 
-  terrainImg.addEventListener('load', handleImgLoad)
+  terrainImg.addEventListener('load', () => {
+    window.requestAnimationFrame(renderWorld)
+  })
 }
 
 export default processWorld

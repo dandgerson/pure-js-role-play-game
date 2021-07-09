@@ -58,8 +58,14 @@ const processCharacter = ({
     store.dispatch(setTurned(direction))
   }
 
-  const handleImgLoad = () => {
-    initCharPos()
+  let isFirstRender = true
+
+  const renderCharacter = () => {
+    if (isFirstRender) {
+      initCharPos()
+
+      isFirstRender = false
+    }
 
     const directionsMap = {
       down: 0,
@@ -68,81 +74,83 @@ const processCharacter = ({
       up: 3,
     }
 
-    setInterval(() => {
-      switch (true) {
-        case state.key.isLeftPressed && state.key.isUpPressed: {
-          turnTo('left')
-          moveTo('left')
-          moveTo('up')
-          animateSprite()
-          break
-        }
-        case state.key.isRightPressed && state.key.isUpPressed: {
-          turnTo('right')
-          moveTo('right')
-          moveTo('up')
-          animateSprite()
-          break
-        }
-        case state.key.isRightPressed && state.key.isDownPressed: {
-          turnTo('right')
-          moveTo('right')
-          moveTo('down')
-          animateSprite()
-          break
-        }
-        case state.key.isLeftPressed && state.key.isDownPressed: {
-          turnTo('left')
-          moveTo('left')
-          moveTo('down')
-          animateSprite()
-          break
-        }
-        case state.key.isRightPressed: {
-          turnTo('right')
-          moveTo('right')
-          animateSprite()
-          break
-        }
-        case state.key.isLeftPressed: {
-          turnTo('left')
-          moveTo('left')
-          animateSprite()
-          break
-        }
-        case state.key.isUpPressed: {
-          turnTo('up')
-          moveTo('up')
-          animateSprite()
-          break
-        }
-        case state.key.isDownPressed: {
-          turnTo('down')
-          moveTo('down')
-          animateSprite()
-          break
-        }
-        default:
-          break
+    switch (true) {
+      case state.key.isLeftPressed && state.key.isUpPressed: {
+        turnTo('left')
+        moveTo('left')
+        moveTo('up')
+        animateSprite()
+        break
       }
+      case state.key.isRightPressed && state.key.isUpPressed: {
+        turnTo('right')
+        moveTo('right')
+        moveTo('up')
+        animateSprite()
+        break
+      }
+      case state.key.isRightPressed && state.key.isDownPressed: {
+        turnTo('right')
+        moveTo('right')
+        moveTo('down')
+        animateSprite()
+        break
+      }
+      case state.key.isLeftPressed && state.key.isDownPressed: {
+        turnTo('left')
+        moveTo('left')
+        moveTo('down')
+        animateSprite()
+        break
+      }
+      case state.key.isRightPressed: {
+        turnTo('right')
+        moveTo('right')
+        animateSprite()
+        break
+      }
+      case state.key.isLeftPressed: {
+        turnTo('left')
+        moveTo('left')
+        animateSprite()
+        break
+      }
+      case state.key.isUpPressed: {
+        turnTo('up')
+        moveTo('up')
+        animateSprite()
+        break
+      }
+      case state.key.isDownPressed: {
+        turnTo('down')
+        moveTo('down')
+        animateSprite()
+        break
+      }
+      default:
+        break
+    }
 
-      ctx.clearRect(0, 0, w, h)
+    ctx.clearRect(0, 0, w, h)
 
-      ctx.drawImage(
-        img, // img elem
-        state.character.cycle * charSprite.w, // image pos x
-        charSprite.h * directionsMap[state.character.turned], // image pos y
-        charSprite.w, // image width
-        charSprite.h, // image height
-        state.character.posX, // canvas pos x
-        state.character.posY, // canvas pos y
-        charSprite.w, // canvas image width
-        charSprite.h, // canvas image height
-      )
-    }, 65)
+    ctx.drawImage(
+      img, // img elem
+      state.character.cycle * charSprite.w, // image pos x
+      charSprite.h * directionsMap[state.character.turned], // image pos y
+      charSprite.w, // image width
+      charSprite.h, // image height
+      state.character.posX, // canvas pos x
+      state.character.posY, // canvas pos y
+      charSprite.w, // canvas image width
+      charSprite.h, // canvas image height
+    )
+
+    window.requestAnimationFrame(renderCharacter)
   }
 
-  img.addEventListener('load', handleImgLoad)
+  img.addEventListener('load', () => {
+    window.requestAnimationFrame(renderCharacter)
+  })
 }
 
 export default processCharacter

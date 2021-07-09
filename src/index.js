@@ -3,11 +3,11 @@ import './styles/main.scss'
 import store from 'store'
 
 import processControls from 'modules/processControls'
-// import processCharacter from 'modules/processCharacter'
+import processCharacter from 'modules/processCharacter'
 import processWorld from 'modules/world'
 
 const canvas = document.querySelector('#game')
-// const { width: w, height: h } = canvas.getBoundingClientRect()
+const { width: w, height: h } = canvas.getBoundingClientRect()
 const ctx = canvas.getContext('2d')
 
 const state = {
@@ -27,10 +27,10 @@ store.subscribe(characterStateListenter)
 // store.subscribe(() => console.log(state))
 
 processControls()
+processCharacter({
+  w,
+  h,
+  ctx,
+  state,
+})
 processWorld({ canvas, ctx })
-// processCharacter({
-//   w,
-//   h,
-//   ctx,
-//   state,
-// })
