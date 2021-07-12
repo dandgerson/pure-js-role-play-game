@@ -2,7 +2,7 @@ import eventSourceMixin from 'common/eventSourceMixin'
 
 class ClientEngine {
   constructor(canvas) {
-    console.log(canvas)
+    // console.log(canvas)
 
     Object.assign(this, {
       canvas,
@@ -47,7 +47,7 @@ class ClientEngine {
       Object.keys(group).forEach((sprite) => {
         const { img: imgUrl } = group[sprite]
 
-        console.log({ img: imgUrl })
+        // console.log({ img: imgUrl })
         if (!this.images[imgUrl]) {
           this.imageLoaders.push(this.loadImage(imgUrl))
         }
@@ -67,6 +67,16 @@ class ClientEngine {
       img.onload = () => resolve(img)
       img.src = url
     })
+  }
+
+  renderSpriteFrame({
+    sprite, frame, x, y, w, h,
+  }) {
+    const spriteConfig = this.sprites[sprite[0]][sprite[1]]
+    const [fx, fy, fw, fh] = spriteConfig.frames[frame]
+    const img = this.images[spriteConfig.img]
+
+    this.ctx.drawImage(img, fx, fy, fw, fh, x, y, w, h)
   }
 }
 

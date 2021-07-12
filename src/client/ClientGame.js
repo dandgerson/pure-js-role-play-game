@@ -1,7 +1,9 @@
 import ClientEngine from 'client/ClientEngine'
+import ClientWorld from 'client/ClientWorld'
 import eventSourceMixin from 'common/eventSourceMixin'
 
 import sprites from 'configs/sprites'
+import worldJson from 'configs/world.json'
 
 class ClientGame {
   constructor({ config }) {
@@ -10,6 +12,8 @@ class ClientGame {
     })
 
     this.engine = this.createEngine()
+    this.world = this.createWorld()
+
     this.initEngine()
   }
 
@@ -17,7 +21,7 @@ class ClientGame {
     if (!ClientGame.game) {
       ClientGame.game = new ClientGame({ config })
 
-      console.log('Game init')
+      // console.log('Game init')
     }
   }
 
@@ -25,11 +29,21 @@ class ClientGame {
     return new ClientEngine(document.querySelector(this.config.tagId))
   }
 
+  createWorld() {
+    return new ClientWorld({
+      game: this,
+      engine: this.engine,
+      config: worldJson,
+    })
+  }
+
   initEngine() {
     this.engine.loadSprites(sprites).then(() => {
-      console.log({ engine: this.engine })
-      this.engine.on('render', (_, timestamp) => {
-        console.log('RENDER', timestamp)
+      // console.log({ engine: this.engine })
+      this.engine.on('render', () => {
+        // _,
+        // timestamp,
+        this.world.init()
       })
       this.engine.start()
     })
