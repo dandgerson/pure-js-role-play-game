@@ -1,3 +1,5 @@
+import eventSourceMixin from 'common/eventSourceMixin'
+
 class ClientEngine {
   constructor(canvas) {
     console.log(canvas)
@@ -18,11 +20,12 @@ class ClientEngine {
     this.loop()
   }
 
-  loop() {
-    // (timestamp)
+  loop(timestamp) {
     const { ctx, canvas } = this
     ctx.fillStyle = 'black'
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    this.trigger('render', timestamp)
 
     this.initNextFrame()
   }
@@ -66,5 +69,7 @@ class ClientEngine {
     })
   }
 }
+
+Object.assign(ClientEngine.prototype, eventSourceMixin)
 
 export default ClientEngine
