@@ -1,5 +1,5 @@
 import terrainAtlas from 'assets/terrain.png'
-import sprites from './sprites'
+import sprites from '../../configs/sprites'
 import worldConfig from './world.json'
 
 const processWorld = ({ ctx }) => {

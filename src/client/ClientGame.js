@@ -1,5 +1,7 @@
 import ClientEngine from 'client/ClientEngine'
 
+import sprites from 'configs/sprites'
+
 class ClientGame {
   constructor({ config }) {
     Object.assign(this, {
@@ -23,7 +25,10 @@ class ClientGame {
   }
 
   initEngine() {
-    this.engine.start()
+    this.engine.loadSprites(sprites).then(() => {
+      console.log({ engine: this.engine })
+      this.engine.start()
+    })
   }
 }
 
