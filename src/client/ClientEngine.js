@@ -2,8 +2,6 @@ import eventSourceMixin from 'common/eventSourceMixin'
 
 class ClientEngine {
   constructor(canvas) {
-    // console.log(canvas)
-
     Object.assign(this, {
       canvas,
       ctx: null,

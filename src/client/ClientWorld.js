@@ -10,13 +10,25 @@ class ClientWorld {
   }
 
   init() {
-    this.engine.renderSpriteFrame({
-      sprite: ['terrain', 'grass'],
-      frame: 0,
-      x: 0,
-      y: 0,
+    const { map } = this.config
+
+    const sprite = {
       w: 48,
       h: 48,
+    }
+
+    map.forEach((row, y) => {
+      row.forEach((cell, x) => {
+        const [spriteName] = cell
+        this.engine.renderSpriteFrame({
+          sprite: ['terrain', spriteName],
+          frame: 0,
+          x: sprite.w * x,
+          y: sprite.h * y,
+          w: 48,
+          h: 48,
+        })
+      })
     })
   }
 }

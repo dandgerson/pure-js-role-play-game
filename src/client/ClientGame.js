@@ -39,12 +39,12 @@ class ClientGame {
 
   initEngine() {
     this.engine.loadSprites(sprites).then(() => {
-      // console.log({ engine: this.engine })
       this.engine.on('render', () => {
         // _,
         // timestamp,
         this.world.init()
       })
+
       this.engine.start()
     })
   }
