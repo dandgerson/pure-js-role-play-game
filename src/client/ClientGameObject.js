@@ -51,7 +51,10 @@ class ClientGameObject extends MovableObject {
         x, y, width, height,
       } = newCell
       Object.assign(this, {
-        x, y, width, height,
+        x,
+        y,
+        width,
+        height,
       })
     }
   }
@@ -69,7 +72,12 @@ class ClientGameObject extends MovableObject {
     const spriteFrame = states ? states.main.frames[0] : frame
 
     engine.renderSpriteFrame({
-      sprite, frame: spriteFrame, x, y, w: width, h: height,
+      sprite,
+      frame: spriteFrame,
+      x,
+      y,
+      w: width,
+      h: height,
     })
   }
 
