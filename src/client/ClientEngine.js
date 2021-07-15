@@ -1,4 +1,5 @@
-import eventSourceMixin from 'common/eventSourceMixin'
+import ClientCamera from 'client/ClientCamera'
+import eventSourceMixin from 'common/EventSourceMixin'
 
 class ClientEngine {
   constructor(canvas) {
@@ -8,6 +9,7 @@ class ClientEngine {
       imageLoaders: [],
       sprites: {},
       images: {},
+      camera: new ClientCamera({ canvas, engine: this }),
     })
 
     this.ctx = this.canvas.getContext('2d')

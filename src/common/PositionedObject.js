@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
-import eventSourceMixin from './eventSourceMixin'
+import eventSourceMixin from './EventSourceMixin'
 
 class PositionedObject {
   constructor(cfg) {
