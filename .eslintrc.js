@@ -12,4 +12,12 @@ module.exports = {
     semi: [2, 'never'],
     'arrow-parens': [2, 'as-needed', { requireForBlockBody: true }],
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx'],
+        paths: ['src'],
+      },
+    },
+  },
 }
