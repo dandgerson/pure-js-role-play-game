@@ -52,6 +52,26 @@ class ClientGame {
       })
 
       this.engine.start()
+      this.initKeys()
+    })
+  }
+
+  initKeys() {
+    const setMovableTile = tile => cell => cell.findObjectsByType(tile).length
+
+    this.engine.input.onKey({
+      ArrowLeft: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(-1, 0, setMovableTile('grass'))
+      },
+      ArrowRight: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(1, 0, setMovableTile('grass'))
+      },
+      ArrowUp: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(0, -1, setMovableTile('grass'))
+      },
+      ArrowDown: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(0, 1, setMovableTile('grass'))
+      },
     })
   }
 }
