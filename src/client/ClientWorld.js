@@ -7,7 +7,7 @@ class ClientWorld extends PositionedObject {
     super()
 
     const worldWidth = levelCfg.map[0].length
-    const worldHeight = levelCfg.map.legth
+    const worldHeight = levelCfg.map.length
     const cellSize = engine.canvas.height / levelCfg.camera.height
 
     Object.assign(this, {
@@ -16,6 +16,8 @@ class ClientWorld extends PositionedObject {
       levelCfg,
       height: worldHeight * cellSize,
       width: worldWidth * cellSize,
+      worldHeight,
+      worldWidth,
       cellWidth: cellSize,
       cellHeight: cellSize,
       map: [],
@@ -35,7 +37,7 @@ class ClientWorld extends PositionedObject {
           world: this,
           cellCol: col,
           cellRow: row,
-          cellCfg: levelCfg[row][col],
+          cellCfg: levelCfg.map[row][col],
         })
       }
     }
@@ -44,14 +46,14 @@ class ClientWorld extends PositionedObject {
   render(time) {
     const { map, worldHeight, worldWidth } = this
 
-    for (let row = 0; row < worldWidth; row++) {
-      for (let col = 0; col < worldHeight; col++) {
+    for (let row = 0; row < worldHeight; row++) {
+      for (let col = 0; col < worldWidth; col++) {
         map[row][col].render(time)
       }
     }
   }
 
-  cellAt(row, col) {
+  cellAt(col, row) {
     return this.map[row] && this.map[row][col]
   }
 }
