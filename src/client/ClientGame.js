@@ -57,20 +57,20 @@ class ClientGame {
   }
 
   initKeys() {
-    const setMovableTile = tiles => cell => tiles.some(tile => cell.findObjectsByType(tile).length)
+    const setMovableTiles = tiles => cell => tiles.some(tile => cell.findObjectsByType(tile).length)
 
     this.engine.input.onKey({
       ArrowLeft: (keydown) => {
-        if (keydown) this.player.moveByCellCoord(-1, 0, setMovableTile(['grass', 'wall']))
+        if (keydown) this.player.moveByCellCoord(-1, 0, setMovableTiles(['grass', 'wall']))
       },
       ArrowRight: (keydown) => {
-        if (keydown) this.player.moveByCellCoord(1, 0, setMovableTile(['grass']))
+        if (keydown) this.player.moveByCellCoord(1, 0, setMovableTiles(['grass']))
       },
       ArrowUp: (keydown) => {
-        if (keydown) this.player.moveByCellCoord(0, -1, setMovableTile(['grass']))
+        if (keydown) this.player.moveByCellCoord(0, -1, setMovableTiles(['grass']))
       },
       ArrowDown: (keydown) => {
-        if (keydown) this.player.moveByCellCoord(0, 1, setMovableTile(['grass']))
+        if (keydown) this.player.moveByCellCoord(0, 1, setMovableTiles(['grass']))
       },
     })
   }
