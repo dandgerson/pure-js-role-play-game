@@ -1,14 +1,17 @@
 import ClientEngine from 'client/ClientEngine'
 import ClientWorld from 'client/ClientWorld'
-import eventSourceMixin from 'common/eventSourceMixin'
+import eventSourceMixin from 'common/EventSourceMixin'
 
 import sprites from 'configs/sprites'
 import worldJson from 'configs/world.json'
+import gameObjects from 'configs/gameObjects.json'
 
 class ClientGame {
   constructor({ config }) {
     Object.assign(this, {
       config,
+      gameObjects,
+      player: null,
     })
 
     this.engine = this.createEngine()
@@ -25,6 +28,10 @@ class ClientGame {
     }
   }
 
+  setPlayer(player) {
+    this.player = player
+  }
+
   createEngine() {
     return new ClientEngine(document.querySelector(this.config.tagId))
   }
@@ -33,19 +40,38 @@ class ClientGame {
     return new ClientWorld({
       game: this,
       engine: this.engine,
-      config: worldJson,
+      levelCfg: worldJson,
     })
   }
 
   initEngine() {
     this.engine.loadSprites(sprites).then(() => {
-      this.engine.on('render', () => {
-        // _,
-        // timestamp,
-        this.world.init()
+      this.world.init()
+      this.engine.on('render', (_, timestamp) => {
+        this.world.render(timestamp)
       })
 
       this.engine.start()
+      this.initKeys()
+    })
+  }
+
+  initKeys() {
+    const setMovableTiles = tiles => cell => tiles.some(tile => cell.findObjectsByType(tile).length)
+
+    this.engine.input.onKey({
+      ArrowLeft: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(-1, 0, setMovableTiles(['grass', 'wall']))
+      },
+      ArrowRight: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(1, 0, setMovableTiles(['grass']))
+      },
+      ArrowUp: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(0, -1, setMovableTiles(['grass']))
+      },
+      ArrowDown: (keydown) => {
+        if (keydown) this.player.moveByCellCoord(0, 1, setMovableTiles(['grass']))
+      },
     })
   }
 }

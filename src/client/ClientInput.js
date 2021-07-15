@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import eventSourceMixin from 'common/eventSourceMixin'
+import eventSourceMixin from 'common/EventSourceMixin'
 
 class ClientInput {
   constructor(canvas) {

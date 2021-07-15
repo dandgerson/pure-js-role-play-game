@@ -5,11 +5,11 @@ export default {
   },
 
   on(event, callback) {
-    this.pushEvent(event, [callback])
+    this.pushEvent(event, [true, callback])
   },
 
   once(event, callback) {
-    this.pushEvent(event, [callback, true])
+    this.pushEvent(event, [false, callback])
   },
 
   un(event, subToUn) {
@@ -21,9 +21,9 @@ export default {
     const subs = this.subscribers
     if (subs && subs[event]) {
       // вызываем все обработчики
-      subs[event].forEach(([callback]) => callback(event, data, this))
+      subs[event].forEach(sub => sub[1](event, data, this))
       // удаляем все одноразовые обработчики
-      subs[event] = subs[event].filter(([, isOnce]) => !isOnce)
+      subs[event] = subs[event].filter(sub => sub[0])
     }
   },
 }
