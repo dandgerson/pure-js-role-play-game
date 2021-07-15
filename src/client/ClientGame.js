@@ -11,6 +11,7 @@ class ClientGame {
     Object.assign(this, {
       config,
       gameObjects,
+      player: null,
     })
 
     this.engine = this.createEngine()
@@ -25,6 +26,10 @@ class ClientGame {
 
       // console.log('Game init')
     }
+  }
+
+  setPlayer(player) {
+    this.player = player
   }
 
   createEngine() {

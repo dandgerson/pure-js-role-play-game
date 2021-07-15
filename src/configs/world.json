@@ -5,7 +5,17 @@
     "x": 2,
     "y": 4
   },
-  "layers": [{ "isStatic": true }, { "isStatic": false }, { "isStatic": false }],
+  "layers": [
+    {
+      "isStatic": true
+    },
+    {
+      "isStatic": false
+    },
+    {
+      "isStatic": false
+    }
+  ],
   "map": [
     [
       [["wall"]],
@@ -38,7 +48,15 @@
       [["grass"]],
       [["grass"]],
       [["grass"]],
-      [["grass"]],
+      [
+        [
+          "grass",
+          {
+            "type": "boy1",
+            "player": true
+          }
+        ]
+      ],
       [["grass"]],
       [["grass"]],
       [["grass"]],
